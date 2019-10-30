@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
  */
 router.post('/', function (req, res, next) {
     getCardsWithPredicate(req, function(error, cardResult) {
-        res.send({'Status':'OK', 'result': cardResult})
+        res.send({'status':'OK', 'results': cardResult})
     });
 });
 
