@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const {  Client } = require("pg");
+const { Client } = require("pg");
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 client.connect();
@@ -16,8 +16,11 @@ client.connect();
  */
 router.get("/", function (req, res, next) {
   getCards(function (error, cardResult) {
+    var response = {};
+    response["status"] = "success";
     var results = cardResult["rows"];
-    res.send(results);
+    response["results"] = results;
+    res.send(response);
   });
 });
 
