@@ -34,7 +34,7 @@ router.post("/", function (req, res, next) {
     response["status"] = "success";
     var results = cardResult["rows"];
     response["results"] = results;
-    res.send(results);
+    res.send(response);
   });
 });
 
