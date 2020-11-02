@@ -1,18 +1,34 @@
 # Hearthstone API
 
-This node.js application is used to serve as the API between our Android application and the 
-MySQL database that contains all the information about the current Standard cards in 
-Hearthstone (minus the ones from the latest expansion).
+## Description
 
-To run this app, you need to have `npm` installed on your laptop which comes bundled with 
-Node.js.
+This node.js application is used to serve as the API between our Android application and the
+MySQL database that contains all the information about the very first set of cards used in Standard mode.
 
-After downloading and installing Node.js, make sure that :
-1. You have a MySQL database service opened;
-2. This MySQL database contains a 'hearthstone' database with all the data about cards;
-3. This Node.js application has its MySQL connection details correctly set up.
+The application is hosted here: https://boiling-shelf-89461.herokuapp.com/
 
-When all of this is done, you can open a Terminal window and go to the root directory of this
-project, then type `npm start` to start the application. Then, open your web browser, and go
-to `localhost:3000/` to see the index page, or `localhost:3000/cards` to see a list of all
-cards stored in the database.
+## Endpoints
+
+There are only one endpoint in this application:
+
+- GET `/Cards`: which outputs a JSON array with all the cards in the database;
+- POST `/Cards`: which outputs a JSON array with the cards in the database in
+  compliance with the potential HTTP parameters.
+
+The parameters can be for:
+
+- `playerClass`, which is a String array;
+- `cost`, which is a String;
+- `name`, which is a String that search in the card name and description.
+
+## Examples
+
+The following cURL commands should work:
+
+```
+curl -X POST -d '{"playerClass":["Druid"], "cost":"7+"}' -H "Content-type:application/json" https://boiling-shelf-89461.herokuapp.com/Cards
+
+curl -X POST -d '{"playerClass":["Druid", "Rogue"], "cost":"0"}' -H "Content-type:application/json" https://boiling-shelf-89461.herokuapp.com/Cards
+
+curl -X POST -d '{"search": "Ancestral"}' -H "Content-type:application/json" https://boiling-shelf-89461.herokuapp.com/Cards
+```
