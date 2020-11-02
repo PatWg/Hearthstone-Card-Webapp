@@ -1,15 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { Pool, Client } = require("pg");
-const pool = new Pool({
-  user: "patrick",
-  host: "localhost",
-  database: "hearthstone",
-});
+const {  Client } = require("pg");
+
 const client = new Client({
-  user: "patrick",
-  host: "localhost",
-  database: "hearthstone",
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 client.connect();
