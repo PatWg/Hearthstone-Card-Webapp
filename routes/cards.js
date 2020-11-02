@@ -30,7 +30,10 @@ router.get("/", function (req, res, next) {
  */
 router.post("/", function (req, res, next) {
   getCardsWithPredicate(req, function (error, cardResult) {
+    var response = {};
+    response["status"] = "success";
     var results = cardResult["rows"];
+    response["results"] = results;
     res.send(results);
   });
 });
