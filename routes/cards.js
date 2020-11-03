@@ -4,9 +4,9 @@ const { Client } = require("pg");
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 });
 
 client.connect();
@@ -68,7 +68,7 @@ function getCardsWithPredicate(req, callback) {
     let classes = req.body.playerClass;
     console.log(classes);
     if (classes.length === 1)
-      predicate.push("(playerClass IN (" + classes[0] + "))");
+      predicate.push("(playerClass IN ('" + classes[0] + "'))");
     else {
       let stringBuilder = "(playerClass IN (";
       for (i = 0; i < classes.length - 1; i++) {
