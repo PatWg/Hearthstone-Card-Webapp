@@ -68,7 +68,7 @@ function getCardsWithPredicate(req, callback) {
     let classes = req.body.playerClass;
     console.log(classes);
     if (classes.length === 1)
-      predicate.push("(playerClass IN (" + req.body.playerClass + "))");
+      predicate.push("(playerClass IN (" + classes[0] + "))");
     else {
       let stringBuilder = "(playerClass IN (";
       for (i = 0; i < classes.length - 1; i++) {
